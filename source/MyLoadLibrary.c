@@ -1,8 +1,9 @@
-#include <Python.h>
+//#include <Python.h>
 #include <windows.h>
 
 #include "MemoryModule.h"
 #include "MyLoadLibrary.h"
+#include "Python-dynload.h"
 
 // #define VERBOSE /* enable to print debug output */
 

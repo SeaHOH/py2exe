@@ -17,6 +17,7 @@
     from function prototypes automatically?
 */
 
+#define Py_BUILD_CORE_BUILTIN
 #include <Python.h>
 
 #if !defined(__CYGWIN__)
