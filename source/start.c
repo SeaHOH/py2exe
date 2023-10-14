@@ -23,7 +23,7 @@
 
 #include <windows.h>
 #include <shlobj.h>
-#include <Python.h>
+//#include <Python.h>
 #include <marshal.h>
 
 #include "MyLoadLibrary.h"

@@ -1,7 +1,7 @@
 // Need to define these to be able to use SetDllDirectory.
 #define _WIN32_WINNT 0x0502
 #define NTDDI_VERSION 0x05020000
-#include <Python.h>
+//#include <Python.h>
 #include <windows.h>
 
 static char module_doc[] =
