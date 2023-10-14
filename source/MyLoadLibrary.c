@@ -1,4 +1,4 @@
-//#include <Python.h>
+#include <Python.h>
 #include <windows.h>
 
 #include "MemoryModule.h"
