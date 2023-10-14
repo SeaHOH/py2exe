@@ -14,48 +14,6 @@ jobs:
           TASKS=$(echo $(cat .github/workflows/matrix.json) | sed 's/ //g' )
           echo "matrix=$TASKS" >> $GITHUB_OUTPUT
 
-  sdist:
-    name: Source distribution
-    runs-on: windows-2019
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
-
-      - name: Check Python install
-        run: |
-          which python
-          python --version
-          python -c "import struct; print(struct.calcsize('P') * 8)"
-          which pip
-          pip --version
-
-      - name: Install Python dependencies
-        run: |
-          python -m pip install -U pip setuptools wheel
-          python -m pip install -U cachetools pefile
-
-      - name: Build
-        run: python setup.py sdist
-
-      - name: Prepare for deployment
-        run: |
-          dir dist
-          Get-ChildItem dist -File | Foreach-Object {$sdistname = $_.Name}
-          echo $sdistname
-          echo "SDISTNAME=$sdistname" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
-      - name: Deploy
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.SDISTNAME }}
-          path: |
-            dist/${{ env.SDISTNAME }}
-
   build:
     needs: matrix
     name: Build

@@ -326,11 +326,11 @@ int init_with_instance(HMODULE hmod_exe, char *frozen, int argc, wchar_t **argv)
 //		printf("FATAL Error: could not load python library\n");
 		return -1;
 	}
-	if (PythonLoaded(hmod_pydll) < 0) {
-		SystemError(-1, "FATAL ERROR: Failed to load some Python symbols");
+//	if (PythonLoaded(hmod_pydll) < 0) {
+//		SystemError(-1, "FATAL ERROR: Failed to load some Python symbols");
 //		printf("FATAL Error: failed to load some Python symbols\n");
-		return -1;
-	}
+//		return -1;
+//	}
 
 	set_vars(hmod_pydll);
 
