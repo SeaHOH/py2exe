@@ -59,6 +59,11 @@ int
 #define Py_VerboseFlag (*Py_VerboseFlag_Ptr)
 #define PyModuleDef_Type (*PyModuleDef_Type_Ptr)
 
+int *Py_VerboseFlag_Ptr;
+PyTypeObject *PyModuleDef_Type_Ptr;
+
+PyObject *PyExc_ImportError;
+PyObject *PyExc_ImportError;
 PyObject *PyExc_ImportError;
 PyObject *PyExc_SystemError;
 const char *_Py_PackageContext;
