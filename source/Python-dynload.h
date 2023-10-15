@@ -28,6 +28,12 @@
 #define PyMODINIT_FUNC __declspec(dllexport) PyObject*
 #endif
 
+PyAPI_DATA(int) Py_VerboseFlag;
+PyAPI_DATA(PyObject *) PyExc_ImportError;
+PyAPI_DATA(PyObject *) PyExc_SystemError;
+PyAPI_DATA(PyTypeObject) PyModuleDef_Type;
+PyAPI_DATA(const char *) _Py_PackageContext;
+
 //#include <internal/pycore_runtime.h>
 
 #if (PY_VERSION_HEX >= 0x030C0000) && defined(STANDALONE)
