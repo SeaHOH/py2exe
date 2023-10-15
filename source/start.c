@@ -21,13 +21,13 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+//#include <Python.h>
+#include "python-dynload.h"
+#include <marshal.h>
 #include <windows.h>
 #include <shlobj.h>
-//#include <Python.h>
-//#include <marshal.h>
 
 #include "MyLoadLibrary.h"
-#include "python-dynload.h"
 
 #include <fcntl.h>
 

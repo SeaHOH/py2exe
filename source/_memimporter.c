@@ -2,6 +2,7 @@
 #define _WIN32_WINNT 0x0502
 #define NTDDI_VERSION 0x05020000
 //#include <Python.h>
+#include "Python-dynload.h"
 #include <windows.h>
 
 static char module_doc[] =
@@ -9,10 +10,6 @@ static char module_doc[] =
 
 #include "MyLoadLibrary.h"
 #include "actctx.h"
-
-#ifndef STANDALONE
-#include "python-dynload.h"
-#endif
 
 /*
 static int dprintf(char *fmt, ...)

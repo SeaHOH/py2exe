@@ -17,7 +17,7 @@
     from function prototypes automatically?
 */
 
-#define Py_BUILD_CORE_BUILTIN
+#define Py_BUILD_CORE
 #include <Python.h>
 
 #if !defined(__CYGWIN__)
@@ -27,8 +27,6 @@
 #ifdef STANDALONE
 #define PyMODINIT_FUNC __declspec(dllexport) PyObject*
 #endif
-
-#include <marshal.h>
 
 #if (PY_VERSION_HEX >= 0x030C0000) && defined(STANDALONE)
 
