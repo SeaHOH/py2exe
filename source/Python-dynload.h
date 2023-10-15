@@ -20,9 +20,7 @@
 #define Py_BUILD_CORE
 #include <Python.h>
 
-#if !defined(__CYGWIN__)
 #define PyAPI_FUNC(RTYPE) __declspec(dllimport) RTYPE
-#endif
 #define PyAPI_DATA(RTYPE) extern __declspec(dllimport) RTYPE
 #ifdef STANDALONE
 #define PyMODINIT_FUNC __declspec(dllexport) PyObject*
