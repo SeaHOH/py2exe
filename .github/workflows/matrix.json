@@ -1,4 +1,3 @@
 [
-    {"python-version": "3.8", "python-arch": "x86", "run-tests": "false"},
     {"python-version": "3.11", "python-arch": "x64", "run-tests": "true"},
 ]

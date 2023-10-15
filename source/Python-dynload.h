@@ -28,6 +28,8 @@
 #define PyMODINIT_FUNC __declspec(dllexport) PyObject*
 #endif
 
+#include <internal/pycore_runtime.h>
+
 #if (PY_VERSION_HEX >= 0x030C0000) && defined(STANDALONE)
 
 #include <windows.h>
