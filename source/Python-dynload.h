@@ -17,7 +17,10 @@
     from function prototypes automatically?
 */
 
+#ifndef STANDALONE
 #define Py_BUILD_CORE
+#endif
+
 #include <Python.h>
 
 #if !defined(__CYGWIN__)
@@ -28,12 +31,8 @@
 #define PyMODINIT_FUNC __declspec(dllexport) PyObject*
 #endif
 
-#include <pyerrors.h>
-#include <modsupport.h>
-#include <moduleobject.h>
-#include <cpython/pydebug.h>
 
-#if (PY_VERSION_HEX >= 0x030C0000) && defined(STANDALONE)
+#if !defined(STANDALONE) || (PY_VERSION_HEX >= 0x030C0000)
 
 #include <windows.h>
 #include "MyLoadLibrary.h"
@@ -44,17 +43,31 @@
 */
 
 #define DL_FUNC(name) (FARPROC)name = MyGetProcAddress(hmod_pydll, #name)
-#define DL_DATA_PTR(name, myname) \
-        (FARPROC)myname = MyGetProcAddress(hmod_pydll, #name)
+#define DL_DATA_PTR(name) (FARPROC)name = MyGetProcAddress(hmod_pydll, #name)
+#define DL_DATA_PTR_N(name, myname) \
+  (FARPROC)myname = MyGetProcAddress(hmod_pydll, #name)
 
 ////////////////////////////////////////////////////////////////
+
+#ifdef STANDALONE
 
 int
 (*_PyImport_CheckSubinterpIncompatibleExtensionAllowed)(const char *name);
 
+#else
+
+#define Py_VerboseFlag (*Py_VerboseFlag_Ptr)
+#define PyModuleDef_Type (*PyModuleDef_Type_Ptr)
+
+PyObject *PyExc_ImportError;
+PyObject *PyExc_SystemError;
+const char *_Py_PackageContext;
+
+#endif
+
 ////////////////////////////////////////////////////////////////
 
-void
+inline void
 dynload_pydll(void)
 {
     PyObject *pmodname = PyUnicode_FromString("sys");
@@ -67,7 +80,20 @@ dynload_pydll(void)
     Py_DECREF(sys);
     Py_DECREF(dllhandle);
 
+    #ifdef STANDALONE
+
     DL_FUNC(_PyImport_CheckSubinterpIncompatibleExtensionAllowed);
+
+    #else
+
+    DL_DATA_PTR_N(Py_VerboseFlag, Py_VerboseFlag_Ptr);
+    DL_DATA_PTR_N(PyModuleDef_Type, PyModuleDef_Type_Ptr);
+
+    DL_DATA_PTR(PyExc_ImportError);
+    DL_DATA_PTR(PyExc_SystemError);
+    DL_DATA_PTR(_Py_PackageContext);
+
+    #endif
 }
 
 #endif

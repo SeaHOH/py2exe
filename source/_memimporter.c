@@ -285,5 +285,9 @@ static struct PyModuleDef moduledef = {
 
 PyMODINIT_FUNC PyInit__memimporter(void)
 {
+	#if defined(STANDALONE) && (PY_VERSION_HEX >= 0x030C0000)
+	dynload_pydll();
+	#endif
+
 	return PyModule_Create(&moduledef);
 }
